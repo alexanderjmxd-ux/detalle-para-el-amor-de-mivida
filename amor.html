@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para el amor de mi vida ❤️</title>
+    <style>
+        /* Estilos Base y Fondo Romántico */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fceade 0%, #f3c6bf 50%, #e89999 100%);
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #4a3b32;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- CAPA 1: EL SOBRE SORPRESA --- */
+        #capa-sobre {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffe6ea 0%, #ffb3c1 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            padding: 20px;
+        }
+
+        .contenedor-sobre {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .icono-sobre {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        #capa-sobre h1 {
+            color: #b83b5e;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        #capa-sobre p {
+            color: #6a5446;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-abrir {
+            background-color: #b83b5e;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(184, 59, 94, 0.3);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn-abrir:hover {
+            background-color: #962d4a;
+            transform: scale(1.05);
+        }
+
+        /* --- CAPA 2: EL CONTENIDO PRINCIPAL --- */
+        #capa-contenido {
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+            transition: opacity 1s ease;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Encabezado Principal */
+        header {
+            text-align: center;
+            padding: 25px 20px 10px 20px;
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            color: #b83b5e;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #6a5446;
+            margin-top: 5px;
+        }
+
+        /* Reproductor de Música */
+        .music-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .music-box h3 {
+            margin: 0 0 5px 0;
+            color: #b83b5e;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .audio-player {
+            width: 100%;
+            max-width: 350px;
+            height: 32px;
+            margin-top: 5px;
+        }
+
+        /* Contenedor de Capas Dinámicas de Recuerdos */
+        .timeline {
+            position: relative;
+            margin: 20px 0;
+            min-height: 450px;
+        }
+
+        /* Cada capa de tarjeta oculta por defecto */
+        .memory-card {
+            display: none; 
+            background: #ffffff;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            animation: fadeInCard 0.5s ease-out forwards;
+        }
+
+        /* Clase activa para mostrar la capa actual */
+        .memory-card.active {
+            display: block;
+        }
+
+        /* Ajuste proporcional de imágenes completas */
+        .img-container {
+            width: 100%;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            overflow: hidden;
+        }
+
+        .img-container img, .img-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .card-text {
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #f7eeeb;
+            background: #ffffff;
+        }
+
+        .card-text h2 {
+            font-size: 1.35rem;
+            color: #b83b5e;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .card-text p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #5a4b41;
+            margin-bottom: 20px;
+        }
+
+        /* Botón para cambiar de capa */
+        .btn-siguiente {
+            background-color: #e89999;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(232, 153, 153, 0.4);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-siguiente:hover {
+            background-color: #b83b5e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(184, 59, 94, 0.4);
+        }
+
+        /* Botón Sorpresa Final y Zona de la Carta */
+        .final-button-zone {
+            display: none;
+            text-align: center;
+            margin: 40px 0;
+            animation: fadeInCard 0.8s ease-out forwards;
+        }
+
+        .btn-love {
+            background: #b83b5e;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(184, 59, 94, 0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-love:hover {
+            background: #962d4a;
+            transform: scale(1.03);
+        }
+
+        .hidden-letter {
+            display: none;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            text-align: left;
+            border-left: 6px solid #b83b5e;
+            animation: slideDown 0.6s ease-out forwards;
+        }
+
+        /* Partículas de corazones flotantes */
+        .heart-particle {
+            position: absolute;
+            color: rgba(184, 59, 94, 0.25);
+            font-size: 24px;
+            pointer-events: none;
+            animation: floatUp 7s linear infinite;
+            bottom: -50px;
+            z-index: -1;
+        }
+
+        /* Animaciones */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-105vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .img-container { height: 350px; }
+            header h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="capa-sobre">
+        <div class="contenedor-sobre">
+            <span class="icono-sobre">✉️❤️</span>
+            <h1>¡Tengo un detalle para ti!</h1>
+            <p>Hola mi amor, preparé este espacio para recordarte lo mucho que te amo y lo feliz que me hace compartir la vida contigo. Da clic abajo para abrir tu sorpresa.</p>
+            <button class="btn-abrir" onclick="abrirSobreSorpresa()">Abrir sobre 🌹</button>
+        </div>
+    </div>
+
+
+    <div id="capa-contenido">
+        
+        <header>
+            <h1>Para Mi Persona Favorita ❤️</h1>
+            <p>"Porque cada momento a tu lado... me hace tanto bien."</p>
+        </header>
+
+        <div class="music-box">
+            <h3>🎵 Nuestra Canción de Fondo</h3>
+            <p><strong>Me Haces Tanto Bien</strong> – Alejandro Fernández</p>
+            <audio id="mi-cancion" class="audio-player" controls loop>
+                <source src="tu-archivo-de-audio.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+
+        <div class="timeline">
+
+            <div class="memory-card active" id="card-0">
+                <div class="img-container">
+                    <img src="1.jpg" alt="Tus inicios">
+                </div>
+                <div class="card-text">
+                    <h2>Desde siempre estabas destinada a brillar</h2>
+                    <p>Me encanta ver tus fotos de pequeñita, eras y sigues siendo una princesa, ver esa sonrisa pura y saber que el destino tenía preparado cruzarte en mi camino, estoy muy agradecido con la vida y con el destino por ti por que te vaya bien, por que me de la capacidad de demostrarte que te amo.</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(0)">Siguiente momento ✨</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-1">
+                <div class="img-container">
+                    <img src="5.jpg" alt="Tus ojos">
+                </div>
+                <div class="card-text">
+                    <h2>Esa mirada que me desarma y me fascina</h2>
+                    <p>Tus ojos, tus expresiones, la complicidad en cada mirada... Tienes la magia de hacerme feliz con solo mirarme, la forma en que me miras cuando nadie nos ve, me encantan tus ojitos preciosos mi princesa hermosa.</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(1)">Siguiente momento 💕</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-2">
+                <div class="img-container">
+                    <img src="8.jpg" alt="Momento en la cascada">
+                </div>
+                <div class="card-text">
+                    <h2>Las aventuras juntos las quiero para siempre</h2>
+                    <p>Contigo el mundo es más bonito. Cada viaje, cada parada y cada abrazo fuerte abrazando nuestro amor se queda guardado para siempre en mi mente, tu compañía me ha enseñado mucho, a veces las cosas no salen como uno espera,  a veces salen mejor y siempre es mejor contigo amor de mi vida</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(2)">Siguiente momento 🏔️</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-3">
+                <div class="img-container">
+                    <img src="9.jpg" alt="Nuestras sonrisas">
+                </div>
+                <div class="card-text">
+                    <h2>Mi lugar seguro es a tu lado</h2>
+                    <p>No importa dónde estemos, si es un día soleado o frío, tu sonrisa ilumina todo mi entorno. ¡Hacemos el mejor equipo!</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(3)">Siguiente momento 📸</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-4">
+                <div class="img-container">
+                    <img src="2.jpg" alt="Nuestra graduación">
+                </div>
+                <div class="card-text">
+                    <h2>Tus metas y logros son importantes mi cielo</h2>
+                    <p>Qué orgullo tan inmenso se siente verte cumplir tus metas. Estar ahí a tu lado para celebrar tus triunfos, elegante y hermosa, ha sido uno de mis momentos favoritos a tu lado mami.</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(4)">Siguiente momento 🎓</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-5">
+                <div class="img-container">
+                    <img src="3.jpg" alt="Detalle especial">
+                </div>
+                <div class="card-text">
+                    <h2>Quiero llenarte de amor y pequeños detalles</h2>
+                    <p>Verte feliz con tus flores es mi mayor recompensa. Te mereces el mundo entero y todos los detalles bonitos que existan, siempre habrá la manera o encontraré la manera de verte sonreir, eres mi amor, mi vida, mi alma, mi cielo el cielo más bonito y espectacular que he visto, te amo.</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(5)">Siguiente momento 💐</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-6">
+                <div class="img-container">
+                    <img src="7.jpg" alt="Momento mágico">
+                </div>
+                <div class="card-text">
+                    <h2>Te amo contra cualquier adversidad</h2>
+                    <p>Existe todo un mundo sin embargo para mi todo momento junto a ti no existe nada más solo tú, siempre hay momentos donde me doy cuenta una vez más que eres tú el amor de mi vida, aquel amor que pensé ya no me importaba que no buscaba cuando solo quería paz y llegaste tú que me complementas perfectamente.</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(6)">Siguiente momento 🌌</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-7">
+                <div class="img-container">
+                    <video id="video-recuerdo" loop muted playsinline>
+                        <source src="6.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de video.
+                    </video>
+                </div>
+                <div class="card-text">
+                    <h2>La paz de los momentos sencillos</h2>
+                    <p>Incluso los instantes más simples, cuando descansamos o estamos en silencio, se vuelven extraordinarios porque estás tú, soy tan feliz a tu lado y eso me trae mucha paz.</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(7)">Siguiente momento ☕</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-8">
+                <div class="img-container">
+                    <img src="11.jpg" alt="Tomados de la mano">
+                </div>
+                <div class="card-text">
+                    <h2>Caminando juntos hacia el mañana</h2>
+                    <p>Paso a paso, construyendo un futuro hermoso. Tu mano sobre la mía me da toda la fuerza que necesito.</p>
+                    <button class="btn-siguiente" onclick="siguienteCapa(8)">Ver nuestra promesa 🤝</button>
+                </div>
+            </div>
+
+            <div class="memory-card" id="card-9">
+                <div class="img-container">
+                    <img src="10.jpg" alt="Nuestro compromiso">
+                </div>
+                <div class="card-text">
+                    <h2>Una promesa para siempre</h2>
+                    <p>Esta foto describe perfectamente lo que somos: unión, complicidad, un lazo eterno y un amor que crece fuerte día con día. Gracias por sostener siempre mi mano.</p>
+                    <button class="btn-siguiente" onclick="finalizarRecuerdos()">Terminar de ver ❤️</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="zona-final" class="final-button-zone">
+            <button class="btn-love" onclick="toggleLetter()">Tengo una última sorpresa para ti. Da clic aquí ❤️</button>
+            
+            <div id="love-letter" class="hidden-letter">
+                <p><strong>Mi amor lindo,</strong></p>
+                <p>Esto solo una pizca de todo lo que significas para mí. Volver a mirar estas fotos me recuerda lo afortunado que soy de tenerte a mi lado, de ver tus logros, de viajar contigo, de tomar tu mano y de sentir tu amor incondicional, deseo que juntos logremos todo aquello de lo que hemos hablado, toda meta tiene sus etapas y procesos y mi meta es hacerte feliz y quedarme contigo para siempre.</p>
+                <p>Eres mi princesa, mi amor y mi vida entera: <em>"Me haces tanto bien..."</em>. Tu presencia cura cualquier día gris, tu amor me llena el alma y tu sonrisa es mi motor diario. Gracias por ser la novia más espectacular, comprensiva y hermosa mami.</p>
+                <p>Te amo hoy, mañana y siempre mi cielo ✨🌹</p>
+                <p style="text-align: right; font-weight: bold; color: #b83b5e;">Con todo mi corazón, tu futuro esposo. ❤️</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function abrirSobreSorpresa() {
+            const capaSobre = document.getElementById("capa-sobre");
+            const capaContenido = document.getElementById("capa-contenido");
+            const audio = document.getElementById("mi-cancion");
+            
+            capaSobre.style.opacity = "0";
+            capaSobre.style.visibility = "hidden";
+            
+            capaContenido.style.display = "block";
+            setTimeout(() => {
+                capaContenido.style.opacity = "1";
+                capaContenido.style.visibility = "visible";
+            }, 100);
+
+            if (audio) {
+                audio.play().catch(error => {
+                    console.log("La reproducción automática de audio fue prevenida inicialmente:", error);
+                });
+            }
+        }
+
+        // LÓGICA REVISADA: Busca primero la siguiente tarjeta ANTES de desactivar la actual
+        function siguienteCapa(indiceActual) {
+            const siguienteIndice = indiceActual + 1;
+            const siguienteTarjeta = document.getElementById(`card-${siguienteIndice}`);
+            const tarjetaActual = document.getElementById(`card-${indiceActual}`);
+            
+            if (siguienteTarjeta) {
+                // Hacer el intercambio de clases visible de inmediato
+                siguienteTarjeta.classList.add('active');
+                if (tarjetaActual) tarjetaActual.classList.remove('active');
+                
+                // Si la nueva tarjeta activa contiene el video, darle play automáticamente
+                if (siguienteIndice === 7) {
+                    const video = document.getElementById("video-recuerdo");
+                    if (video) video.play().catch(e => console.log("Espera interacción"));
+                }
+                
+                // Mover suavemente la pantalla al inicio de la nueva foto para comodidad visual
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function finalizarRecuerdos() {
+            const ultimaTarjeta = document.getElementById('card-9');
+            if (ultimaTarjeta) ultimaTarjeta.classList.remove('active');
+            
+            const zonaFinal = document.getElementById('zona-final');
+            if (zonaFinal) {
+                zonaFinal.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function toggleLetter() {
+            const letter = document.getElementById("love-letter");
+            if (letter.style.display === "block") {
+                letter.style.display = "none";
+            } else {
+                letter.style.display = "block";
+                setTimeout(() => {
+                    letter.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+
+        function generateHearts() {
+            const heartIcons = ['❤️', '💖', '💕', '✨', '🌸'];
+            const container = document.body;
+            
+            setInterval(() => {
+                const capaContenido = document.getElementById("capa-contenido");
+                if (capaContenido && capaContenido.style.visibility === "visible") {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart-particle');
+                    heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                    
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                    heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                    
+                    container.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }
+            }, 600);
+        }
+
+        window.onload = generateHearts;
+    </script>
+</body>
+</html>
