@@ -19,6 +19,112 @@
             min-height: 100vh;
         }
 
+        /* CAPA 0: PANTALLA NEGRA CIELO ESTRELLADO + CONTRASEÑA */
+        #capa-passcode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #020208;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            overflow: hidden;
+        }
+
+        /* ESTRELLAS Y ESTRELLAS FUGACES */
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 2s) infinite ease-in-out alternate;
+        }
+
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            filter: drop-shadow(0 0 6px #ffffff);
+            animation: animShootingStar 4s ease-in-out infinite;
+        }
+
+        .shooting-star:nth-child(1) { top: 15%; left: 80%; width: 120px; animation-delay: 0s; }
+        .shooting-star:nth-child(2) { top: 35%; left: 60%; width: 90px; animation-delay: 1.8s; }
+        .shooting-star:nth-child(3) { top: 60%; left: 90%; width: 150px; animation-delay: 3.2s; }
+
+        .passcode-box {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(15, 15, 25, 0.75);
+            padding: 40px 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
+            backdrop-filter: blur(8px);
+            max-width: 380px;
+            width: 90%;
+        }
+
+        .passcode-box h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .passcode-box input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 50px;
+            border: 2px solid #b83b5e;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 3px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .passcode-box button {
+            background-color: #b83b5e;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(184, 59, 94, 0.4);
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .passcode-box button:hover {
+            background-color: #962d4a;
+            transform: scale(1.05);
+        }
+
+        #pass-error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            display: none;
+        }
+
         /* CAPA 1: EL SOBRE */
         #capa-sobre {
             position: fixed;
@@ -308,7 +414,7 @@
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        /* JUEGO PAREJAS Y MOSAICO */
+        /* JUEGO PAREJAS Y MURAL NORMAL */
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -344,35 +450,23 @@
             opacity: 0.6;
         }
 
+        /* MURAL DE RECUERDOS (CUADRÍCULA LIMPIA) */
         .mosaic-container {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            max-width: 580px;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+            max-width: 650px;
             margin: 30px auto 10px auto;
         }
 
         .mosaic-item {
             position: relative;
-            height: 105px;
-            border-radius: 12px;
+            aspect-ratio: 1 / 1;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
             background: #1a1a1a;
         }
-
-        #mosaico-0  { grid-column: 2; grid-row: 1; }
-        #mosaico-1  { grid-column: 5; grid-row: 1; }
-        #mosaico-2  { grid-column: 1; grid-row: 2; }
-        #mosaico-3  { grid-column: 2; grid-row: 2; }
-        #mosaico-4  { grid-column: 3; grid-row: 2; }
-        #mosaico-5  { grid-column: 4; grid-row: 2; }
-        #mosaico-6  { grid-column: 5; grid-row: 2; }
-        #mosaico-7  { grid-column: 6; grid-row: 2; }
-        #mosaico-8  { grid-column: 2; grid-row: 3; }
-        #mosaico-9  { grid-column: 3 / span 2; grid-row: 3; }
-        #mosaico-10 { grid-column: 5; grid-row: 3; }
-        #mosaico-11 { grid-column: 3 / span 2; grid-row: 4; }
 
         .mosaic-item img {
             width: 100%;
@@ -398,14 +492,33 @@
             justify-content: center;
             align-items: center;
             color: white;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             pointer-events: none;
             transition: opacity 0.5s ease;
-            background: rgba(0,0,0,0.25);
+            background: rgba(0,0,0,0.3);
         }
 
         .mosaic-item.unlocked .mosaic-overlay {
             opacity: 0;
+        }
+
+        /* BANNER TE AMO FINAL */
+        .te-amo-banner {
+            display: none;
+            margin-top: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffe6ea 0%, #ffb3c1 100%);
+            border-radius: 20px;
+            border: 2px dashed #b83b5e;
+            animation: slideDown 0.6s ease-out forwards;
+        }
+
+        .te-amo-banner h1 {
+            color: #b83b5e;
+            font-size: 3.2rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(184, 59, 94, 0.2);
         }
 
         .heart-particle {
@@ -416,6 +529,17 @@
             animation: floatUp 7s linear infinite;
             bottom: -50px;
             z-index: -1;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes animShootingStar {
+            0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateX(-400px) translateY(400px) rotate(-45deg); opacity: 0; }
         }
 
         @keyframes bounce {
@@ -445,13 +569,29 @@
             .img-container { height: 350px; }
             header h1 { font-size: 1.8rem; }
             .memory-grid { grid-template-columns: repeat(4, 1fr); }
-            .mosaic-item { height: 80px; }
+            .mosaic-container { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .te-amo-banner h1 { font-size: 2.3rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- CAPA SOBRE -->
+    <!-- CAPA 0: PANTALLA NEGRA CIELO ESTRELLADO + CONTRASEÑA -->
+    <div id="capa-passcode">
+        <div class="stars-container" id="stars-field">
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+        </div>
+        <div class="passcode-box">
+            <h2>🔒 Contraseña</h2>
+            <input type="password" id="input-pass" placeholder="••••••••" onkeyup="verificarEnter(event)">
+            <button onclick="validarPasscode()">Ingresar ✨</button>
+            <p id="pass-error">Contraseña incorrecta. Inténtalo de nuevo ❤️</p>
+        </div>
+    </div>
+
+    <!-- CAPA 1: SOBRE DE BIENVENIDA -->
     <div id="capa-sobre">
         <div class="contenedor-sobre">
             <span class="icono-sobre">✉️❤️</span>
@@ -461,7 +601,7 @@
         </div>
     </div>
 
-    <!-- CAPA CONTENIDO -->
+    <!-- CAPA 2: CONTENIDO PRINCIPAL -->
     <div id="capa-contenido">
         
         <header>
@@ -479,7 +619,7 @@
             <div id="contenedor-cancion-2" style="display: none; margin-top: 15px;">
                 <h3 style="color: #b83b5e;">🎵 Canción 2: Nuestra Nueva Melodía</h3>
                 <audio id="mi-cancion-2" class="audio-player" controls loop>
-                    <source src="Cami-abrazame.mp3" type="audio/mpeg">
+                    <source src="tu-segunda-cancion.mp3" type="audio/mpeg">
                 </audio>
             </div>
         </div>
@@ -590,7 +730,7 @@
 
             <div class="memory-card" id="card-9">
                 <div class="img-container">
-                    <img src="10.jpg" alt="Recuerdo 10">
+                    <img src="4.jpg" alt="Recuerdo 10">
                 </div>
                 <div class="card-text">
                     <h2>Una promesa para siempre</h2>
@@ -618,7 +758,7 @@
             </div>
         </div>
 
-        <!-- FASE 2: DESAFÍOS Y MOSAICO -->
+        <!-- FASE 2: DESAFÍOS Y MURAL -->
         <div id="capa-fase-2">
             
             <!-- PUZLE 4x4 -->
@@ -630,31 +770,39 @@
                 <p id="puzzle-status" style="font-weight: bold; color: #b83b5e; min-height: 24px;"></p>
             </div>
 
-            <!-- MOSAICO 12 FOTOS EN CORAZÓN -->
+            <!-- MURAL DE FOTOGRAFÍAS -->
             <div class="section-box" id="bloque-mosaico" style="display: none;">
-                <h2>💖 Revela Nuestro Mosaico de Corazón</h2>
-                <p>Encuentra las 12 parejas de símbolos para ir desbloqueando cada una de las fotos del corazón.</p>
+                <h2>💖 Revela Nuestro Mural de Recuerdos</h2>
+                <p>Encuentra las 12 parejas de símbolos para ir desbloqueando cada una de las fotos de nuestro mural.</p>
                 
                 <div class="memory-grid" id="tablero-memoria"></div>
 
                 <div class="mosaic-container">
-                    <div class="mosaic-item" id="mosaico-0"><img src="1.jpg" alt="Foto 1"><div class="mosaic-overlay">👶</div></div>
-                    <div class="mosaic-item" id="mosaico-1"><img src="2.jpg" alt="Foto 2"><div class="mosaic-overlay">💍</div></div>
-                    <div class="mosaic-item" id="mosaico-2"><img src="3.jpg" alt="Foto 3"><div class="mosaic-overlay">⛪</div></div>
-                    <div class="mosaic-item" id="mosaico-3"><img src="4.jpg" alt="Foto 4"><div class="mosaic-overlay">🏠</div></div>
-                    <div class="mosaic-item" id="mosaico-4"><img src="5.jpg" alt="Foto 5"><div class="mosaic-overlay">🌅</div></div>
-                    <div class="mosaic-item" id="mosaico-5"><img src="6.jpg" alt="Foto 6"><div class="mosaic-overlay">☀️</div></div>
-                    <div class="mosaic-item" id="mosaico-6"><img src="7.jpg" alt="Foto 7"><div class="mosaic-overlay">🌙</div></div>
-                    <div class="mosaic-item" id="mosaico-7"><img src="8.jpg" alt="Foto 8"><div class="mosaic-overlay">🌠</div></div>
-                    <div class="mosaic-item" id="mosaico-8"><img src="9.jpg" alt="Foto 9"><div class="mosaic-overlay">💋</div></div>
-                    <div class="mosaic-item" id="mosaico-9"><img src="10.jpg" alt="Foto 10"><div class="mosaic-overlay">🏖️</div></div>
-                    <div class="mosaic-item" id="mosaico-10"><img src="11.jpg" alt="Foto 11"><div class="mosaic-overlay">❤️</div></div>
-                    <div class="mosaic-item" id="mosaico-11"><img src="12.jpg" alt="Foto 12"><div class="mosaic-overlay">🌹</div></div>
+                    <div class="mosaic-item" id="mosaico-0"><img src="10.jpg" alt="Foto 1"><div class="mosaic-overlay">👶</div></div>
+                    <div class="mosaic-item" id="mosaico-1"><img src="11.jpg" alt="Foto 2"><div class="mosaic-overlay">💍</div></div>
+                    <div class="mosaic-item" id="mosaico-2"><img src="12.jpg" alt="Foto 3"><div class="mosaic-overlay">⛪</div></div>
+                    <div class="mosaic-item" id="mosaico-3"><img src="13.jpg" alt="Foto 4"><div class="mosaic-overlay">🏠</div></div>
+                    <div class="mosaic-item" id="mosaico-4"><img src="14.jpg" alt="Foto 5"><div class="mosaic-overlay">🌅</div></div>
+                    <div class="mosaic-item" id="mosaico-5"><img src="15.jpg" alt="Foto 6"><div class="mosaic-overlay">☀️</div></div>
+                    <div class="mosaic-item" id="mosaico-6"><img src="16.jpg" alt="Foto 7"><div class="mosaic-overlay">🌙</div></div>
+                    <div class="mosaic-item" id="mosaico-7"><img src="17.jpg" alt="Foto 8"><div class="mosaic-overlay">🌠</div></div>
+                    <div class="mosaic-item" id="mosaico-8"><img src="18.jpg" alt="Foto 9"><div class="mosaic-overlay">💋</div></div>
+                    <div class="mosaic-item" id="mosaico-9"><img src="19.jpg" alt="Foto 10"><div class="mosaic-overlay">🏖️</div></div>
+                    <div class="mosaic-item" id="mosaico-10"><img src="20.jpg" alt="Foto 11"><div class="mosaic-overlay">❤️</div></div>
+                    <div class="mosaic-item" id="mosaico-11"><img src="1.jpg" alt="Foto 12"><div class="mosaic-overlay">🌹</div></div>
                 </div>
 
-                <div id="mensaje-victoria-final" style="display: none; margin-top: 25px; animation: slideDown 0.6s ease-out;">
+                <div id="mensaje-victoria-final" style="display: none; margin-top: 30px; animation: slideDown 0.6s ease-out;">
                     <h3 style="color: #b83b5e; font-size: 1.4rem;">¡Lo lograste, mi amor! 🎉❤️</h3>
-                    <p>Cada recuerdo contigo es perfecto y encaja exactamente en el lugar correcto de mi vida. Te amo infinitamente.</p>
+                    <p>Cada recuerdo contigo es perfecto y encaja exactamente en el lugar correcto de mi vida.</p>
+                    
+                    <div style="margin-top: 25px;">
+                        <button class="btn-love" onclick="desplegarTeAmo()">Pulsa Aquí ❤️</button>
+                    </div>
+
+                    <div id="banner-te-amo" class="te-amo-banner">
+                        <h1>¡TE AMO! ❤️✨</h1>
+                    </div>
                 </div>
             </div>
 
@@ -663,6 +811,45 @@
     </div>
 
     <script>
+        /* GENERADOR DE ESTRELLAS EN EL CIELO */
+        function generarCieloEstrellado() {
+            const container = document.getElementById("stars-field");
+            for (let i = 0; i < 90; i++) {
+                const star = document.createElement("div");
+                star.classList.add("star");
+                star.style.top = Math.random() * 100 + "%";
+                star.style.left = Math.random() * 100 + "%";
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + "px";
+                star.style.height = size + "px";
+                star.style.setProperty('--duration', (Math.random() * 3 + 1.5) + "s");
+                container.appendChild(star);
+            }
+        }
+
+        /* VALIDACIÓN DE CONTRASEÑA */
+        function verificarEnter(event) {
+            if (event.key === "Enter") {
+                validarPasscode();
+            }
+        }
+
+        function validarPasscode() {
+            const inputVal = document.getElementById("input-pass").value;
+            const errorMsg = document.getElementById("pass-error");
+            const capaPass = document.getElementById("capa-passcode");
+
+            if (inputVal === "25262025") {
+                errorMsg.style.display = "none";
+                capaPass.style.opacity = "0";
+                setTimeout(() => {
+                    capaPass.style.display = "none";
+                }, 800);
+            } else {
+                errorMsg.style.display = "block";
+            }
+        }
+
         function abrirSobreSorpresa() {
             const capaSobre = document.getElementById("capa-sobre");
             const capaContenido = document.getElementById("capa-contenido");
@@ -728,14 +915,9 @@
             const audio2 = document.getElementById("mi-cancion-2");
             const contenedorAudio2 = document.getElementById("contenedor-cancion-2");
             
-            // Pausar primera canción y reproducir la nueva
             if (audio1) audio1.pause();
-            
             if (contenedorAudio2) contenedorAudio2.style.display = "block";
-            
-            if (audio2) {
-                audio2.play().catch(e => console.log("Audio 2 prevent:", e));
-            }
+            if (audio2) audio2.play().catch(e => console.log("Audio 2 prevent:", e));
 
             const capaFase2 = document.getElementById("capa-fase-2");
             capaFase2.style.display = "block";
@@ -796,7 +978,7 @@
             }
         }
 
-        /* LÓGICA JUEGO PAREJAS Y MOSAICO (12 FOTOS) */
+        /* LÓGICA JUEGO PAREJAS Y MURAL */
         const simbolos = ['👶', '💍', '⛪', '🏠', '🌅', '☀️', '🌙', '🌠', '💋', '🏖️', '❤️', '🌹'];
         let cartasSeleccionadas = [];
         let bloqueoTablero = false;
@@ -870,7 +1052,14 @@
             }
         }
 
-        /* PARTÍCULAS */
+        /* DESPLEGAR MENSAJE TE AMO FINAL */
+        function desplegarTeAmo() {
+            const banner = document.getElementById("banner-te-amo");
+            banner.style.display = "block";
+            banner.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* PARTÍCULAS DE CORAZONES */
         function generateHearts() {
             const heartIcons = ['❤️', '💖', '💕', '✨', '🌸'];
             const container = document.body;
@@ -891,7 +1080,10 @@
             }, 600);
         }
 
-        window.onload = generateHearts;
+        window.onload = function() {
+            generarCieloEstrellado();
+            generateHearts();
+        };
     </script>
 </body>
 </html>
