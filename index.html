@@ -271,14 +271,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1a1a1a;
+            background-color: #0d0d0d;
             overflow: hidden;
         }
 
+        /* AJUSTE: Mantiene proporciones completas sin recortar */
         .img-container img, .img-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
 
         .card-text {
@@ -407,7 +410,7 @@
         .puzzle-tile {
             width: 100%;
             height: 100%;
-            background-image: url('19.jpg');
+            background-image: url('10.jpg');
             background-size: 300px 300px;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -450,10 +453,10 @@
             opacity: 0.6;
         }
 
-        /* MURAL DE RECUERDOS (CUADRÍCULA LIMPIA) */
+        /* MURAL DE RECUERDOS COMPLETO */
         .mosaic-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 15px;
             max-width: 650px;
             margin: 30px auto 10px auto;
@@ -461,17 +464,23 @@
 
         .mosaic-item {
             position: relative;
-            aspect-ratio: 1 / 1;
+            height: 140px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 6px 15px rgba(0,0,0,0.12);
-            background: #1a1a1a;
+            background: #0d0d0d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* AJUSTE: Visualización de las fotos en el mural sin recortar */
         .mosaic-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             filter: blur(10px) grayscale(100%);
             opacity: 0.25;
             transition: all 0.8s ease-in-out;
@@ -495,7 +504,7 @@
             font-size: 1.6rem;
             pointer-events: none;
             transition: opacity 0.5s ease;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
         }
 
         .mosaic-item.unlocked .mosaic-overlay {
@@ -570,6 +579,7 @@
             header h1 { font-size: 1.8rem; }
             .memory-grid { grid-template-columns: repeat(4, 1fr); }
             .mosaic-container { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .mosaic-item { height: 110px; }
             .te-amo-banner h1 { font-size: 2.3rem; }
         }
     </style>
@@ -730,7 +740,7 @@
 
             <div class="memory-card" id="card-9">
                 <div class="img-container">
-                    <img src="4.jpg" alt="Recuerdo 10">
+                    <img src="10.jpg" alt="Recuerdo 10">
                 </div>
                 <div class="card-text">
                     <h2>Una promesa para siempre</h2>
@@ -778,18 +788,18 @@
                 <div class="memory-grid" id="tablero-memoria"></div>
 
                 <div class="mosaic-container">
-                    <div class="mosaic-item" id="mosaico-0"><img src="10.jpg" alt="Foto 1"><div class="mosaic-overlay">👶</div></div>
-                    <div class="mosaic-item" id="mosaico-1"><img src="11.jpg" alt="Foto 2"><div class="mosaic-overlay">💍</div></div>
-                    <div class="mosaic-item" id="mosaico-2"><img src="12.jpg" alt="Foto 3"><div class="mosaic-overlay">⛪</div></div>
-                    <div class="mosaic-item" id="mosaico-3"><img src="13.jpg" alt="Foto 4"><div class="mosaic-overlay">🏠</div></div>
-                    <div class="mosaic-item" id="mosaico-4"><img src="14.jpg" alt="Foto 5"><div class="mosaic-overlay">🌅</div></div>
-                    <div class="mosaic-item" id="mosaico-5"><img src="15.jpg" alt="Foto 6"><div class="mosaic-overlay">☀️</div></div>
-                    <div class="mosaic-item" id="mosaico-6"><img src="16.jpg" alt="Foto 7"><div class="mosaic-overlay">🌙</div></div>
-                    <div class="mosaic-item" id="mosaico-7"><img src="17.jpg" alt="Foto 8"><div class="mosaic-overlay">🌠</div></div>
-                    <div class="mosaic-item" id="mosaico-8"><img src="18.jpg" alt="Foto 9"><div class="mosaic-overlay">💋</div></div>
-                    <div class="mosaic-item" id="mosaico-9"><img src="19.jpg" alt="Foto 10"><div class="mosaic-overlay">🏖️</div></div>
-                    <div class="mosaic-item" id="mosaico-10"><img src="20.jpg" alt="Foto 11"><div class="mosaic-overlay">❤️</div></div>
-                    <div class="mosaic-item" id="mosaico-11"><img src="1.jpg" alt="Foto 12"><div class="mosaic-overlay">🌹</div></div>
+                    <div class="mosaic-item" id="mosaico-0"><img src="1.jpg" alt="Foto 1"><div class="mosaic-overlay">👶</div></div>
+                    <div class="mosaic-item" id="mosaico-1"><img src="2.jpg" alt="Foto 2"><div class="mosaic-overlay">💍</div></div>
+                    <div class="mosaic-item" id="mosaico-2"><img src="3.jpg" alt="Foto 3"><div class="mosaic-overlay">⛪</div></div>
+                    <div class="mosaic-item" id="mosaico-3"><img src="4.jpg" alt="Foto 4"><div class="mosaic-overlay">🏠</div></div>
+                    <div class="mosaic-item" id="mosaico-4"><img src="5.jpg" alt="Foto 5"><div class="mosaic-overlay">🌅</div></div>
+                    <div class="mosaic-item" id="mosaico-5"><img src="6.jpg" alt="Foto 6"><div class="mosaic-overlay">☀️</div></div>
+                    <div class="mosaic-item" id="mosaico-6"><img src="7.jpg" alt="Foto 7"><div class="mosaic-overlay">🌙</div></div>
+                    <div class="mosaic-item" id="mosaico-7"><img src="8.jpg" alt="Foto 8"><div class="mosaic-overlay">🌠</div></div>
+                    <div class="mosaic-item" id="mosaico-8"><img src="9.jpg" alt="Foto 9"><div class="mosaic-overlay">💋</div></div>
+                    <div class="mosaic-item" id="mosaico-9"><img src="10.jpg" alt="Foto 10"><div class="mosaic-overlay">🏖️</div></div>
+                    <div class="mosaic-item" id="mosaico-10"><img src="11.jpg" alt="Foto 11"><div class="mosaic-overlay">❤️</div></div>
+                    <div class="mosaic-item" id="mosaico-11"><img src="12.jpg" alt="Foto 12"><div class="mosaic-overlay">🌹</div></div>
                 </div>
 
                 <div id="mensaje-victoria-final" style="display: none; margin-top: 30px; animation: slideDown 0.6s ease-out;">
