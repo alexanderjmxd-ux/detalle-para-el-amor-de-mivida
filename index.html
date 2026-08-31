@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para el amor de mi vida ❤️</title>
     <style>
-        /* Estilos Base y Fondo Romántico */
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -20,7 +19,7 @@
             min-height: 100vh;
         }
 
-        /* --- CAPA 1: EL SOBRE SORPRESA --- */
+        /* CAPA 1: EL SOBRE */
         #capa-sobre {
             position: fixed;
             top: 0;
@@ -85,7 +84,7 @@
             transform: scale(1.05);
         }
 
-        /* --- CAPA 2: EL CONTENIDO PRINCIPAL --- */
+        /* CAPA 2: CONTENIDO PRINCIPAL */
         #capa-contenido {
             opacity: 0;
             visibility: hidden;
@@ -255,7 +254,7 @@
             animation: slideDown 0.6s ease-out forwards;
         }
 
-        /* --- SECCIÓN FASE 2: NUEVAS DINÁMICAS --- */
+        /* FASE 2: DINÁMICAS */
         #capa-fase-2 {
             display: none;
             margin-top: 50px;
@@ -283,7 +282,7 @@
             line-height: 1.5;
         }
 
-        /* DINÁMICA 1: PUZLE GIRATORIO (4x4) */
+        /* PUZLE 4x4 */
         .puzzle-board {
             width: 300px;
             height: 300px;
@@ -302,18 +301,14 @@
         .puzzle-tile {
             width: 100%;
             height: 100%;
-            background-image: url('10.jpg'); /* Imagen principal del rompecabezas */
+            background-image: url('19.jpg');
             background-size: 300px 300px;
             cursor: pointer;
-            transition: transform 0.3s ease, border-color 0.2s;
+            transition: transform 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        .puzzle-tile:hover {
-            opacity: 0.9;
-        }
-
-        /* DINÁMICA 2: JUEGO DE PAREJAS (12 PAREJAS) */
+        /* JUEGO PAREJAS Y MOSAICO */
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -349,7 +344,6 @@
             opacity: 0.6;
         }
 
-        /* MOSAICO EN FORMA DE CORAZÓN (NUEVAS IMÁGENES 10.jpg A 20.jpg) */
         .mosaic-container {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -367,21 +361,17 @@
             background: #1a1a1a;
         }
 
-        /* Distribución Geométrica en Forma de Corazón */
         #mosaico-0  { grid-column: 2; grid-row: 1; }
         #mosaico-1  { grid-column: 5; grid-row: 1; }
-
         #mosaico-2  { grid-column: 1; grid-row: 2; }
         #mosaico-3  { grid-column: 2; grid-row: 2; }
         #mosaico-4  { grid-column: 3; grid-row: 2; }
         #mosaico-5  { grid-column: 4; grid-row: 2; }
         #mosaico-6  { grid-column: 5; grid-row: 2; }
         #mosaico-7  { grid-column: 6; grid-row: 2; }
-
         #mosaico-8  { grid-column: 2; grid-row: 3; }
         #mosaico-9  { grid-column: 3 / span 2; grid-row: 3; }
         #mosaico-10 { grid-column: 5; grid-row: 3; }
-
         #mosaico-11 { grid-column: 3 / span 2; grid-row: 4; }
 
         .mosaic-item img {
@@ -418,7 +408,6 @@
             opacity: 0;
         }
 
-        /* Partículas de corazones flotantes */
         .heart-particle {
             position: absolute;
             color: rgba(184, 59, 94, 0.25);
@@ -429,7 +418,6 @@
             z-index: -1;
         }
 
-        /* Animaciones */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-20px); }
@@ -463,6 +451,7 @@
 </head>
 <body>
 
+    <!-- CAPA SOBRE -->
     <div id="capa-sobre">
         <div class="contenedor-sobre">
             <span class="icono-sobre">✉️❤️</span>
@@ -472,6 +461,7 @@
         </div>
     </div>
 
+    <!-- CAPA CONTENIDO -->
     <div id="capa-contenido">
         
         <header>
@@ -479,17 +469,22 @@
             <p>"Porque cada momento a tu lado... me hace tanto bien."</p>
         </header>
 
+        <!-- REPRODUCTORES DE MÚSICA -->
         <div class="music-box">
-            <h3 id="titulo-cancion">🎵 Nuestra Canción de Fondo</h3>
-            <p id="nombre-cancion"><strong>Me Haces Tanto Bien</strong> – Alejandro Fernández</p>
+            <h3 id="titulo-cancion">🎵 Canción 1: Me Haces Tanto Bien</h3>
             <audio id="mi-cancion" class="audio-player" controls loop>
                 <source src="tu-archivo-de-audio.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
             </audio>
-            <!-- NUEVA CANCIÓN CONFIGURADA -->
-            <audio id="mi-cancion-2" src="Cami-abrazame.mp3" loop></audio>
+            
+            <div id="contenedor-cancion-2" style="display: none; margin-top: 15px;">
+                <h3 style="color: #b83b5e;">🎵 Canción 2: Nuestra Nueva Melodía</h3>
+                <audio id="mi-cancion-2" class="audio-player" controls loop>
+                    <source src="Cami-abrazame.mp3" type="audio/mpeg">
+                </audio>
+            </div>
         </div>
 
+        <!-- RECUERDOS (FASE 1) -->
         <div class="timeline">
 
             <div class="memory-card active" id="card-0">
@@ -553,7 +548,7 @@
                 </div>
                 <div class="card-text">
                     <h2>Quiero llenarte de amor y pequeños detalles</h2>
-                    <p>Verte feliz con tus flores es mi mayor reward. Te mereces el mundo entero y todos los detalles bonitos que existan.</p>
+                    <p>Verte feliz con tus flores es mi mayor recompensa. Te mereces el mundo entero y todos los detalles bonitos que existan.</p>
                     <button class="btn-siguiente" onclick="siguienteCapa(5)">Siguiente momento 💐</button>
                 </div>
             </div>
@@ -573,7 +568,6 @@
                 <div class="img-container">
                     <video id="video-recuerdo" loop muted playsinline controls>
                         <source src="6.mp4" type="video/mp4">
-                        Tu navegador no soporta la reproducción de video.
                     </video>
                 </div>
                 <div class="card-text">
@@ -607,6 +601,7 @@
 
         </div>
 
+        <!-- CARTA Y TRANSICIÓN -->
         <div id="zona-final" class="final-button-zone">
             <button class="btn-love" onclick="toggleLetter()">Tengo una última sorpresa para ti. Da clic aquí ❤️</button>
             
@@ -623,10 +618,10 @@
             </div>
         </div>
 
-        <!-- --- CAPA FASE 2: NUEVAS IMÁGENES Y MÚSICA --- -->
+        <!-- FASE 2: DESAFÍOS Y MOSAICO -->
         <div id="capa-fase-2">
             
-            <!-- PUZLE DE ROTACIÓN DE IMAGEN (4x4) -->
+            <!-- PUZLE 4x4 -->
             <div class="section-box" id="bloque-puzle">
                 <h2>🧩 Nuestro Puzle del Amor (4x4)</h2>
                 <p>Haz clic en cada una de las 16 piezas para girarla hasta armar la imagen correcta.</p>
@@ -635,7 +630,7 @@
                 <p id="puzzle-status" style="font-weight: bold; color: #b83b5e; min-height: 24px;"></p>
             </div>
 
-            <!-- JUEGO DE PAREJAS Y MOSAICO EN CORAZÓN (NUEVAS FOTOS 10.jpg - 20.jpg) -->
+            <!-- MOSAICO 12 FOTOS EN CORAZÓN -->
             <div class="section-box" id="bloque-mosaico" style="display: none;">
                 <h2>💖 Revela Nuestro Mosaico de Corazón</h2>
                 <p>Encuentra las 12 parejas de símbolos para ir desbloqueando cada una de las fotos del corazón.</p>
@@ -643,54 +638,18 @@
                 <div class="memory-grid" id="tablero-memoria"></div>
 
                 <div class="mosaic-container">
-                    <div class="mosaic-item" id="mosaico-0">
-                        <img src="10.jpg" alt="Foto 10">
-                        <div class="mosaic-overlay">👶</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-1">
-                        <img src="11.jpg" alt="Foto 11">
-                        <div class="mosaic-overlay">💍</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-2">
-                        <img src="12.jpg" alt="Foto 12">
-                        <div class="mosaic-overlay">⛪</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-3">
-                        <img src="13.jpg" alt="Foto 13">
-                        <div class="mosaic-overlay">🏠</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-4">
-                        <img src="14.jpg" alt="Foto 14">
-                        <div class="mosaic-overlay">🌅</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-5">
-                        <img src="15.jpg" alt="Foto 15">
-                        <div class="mosaic-overlay">☀️</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-6">
-                        <img src="16.jpg" alt="Foto 16">
-                        <div class="mosaic-overlay">🌙</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-7">
-                        <img src="17.jpg" alt="Foto 17">
-                        <div class="mosaic-overlay">🌠</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-8">
-                        <img src="18.jpg" alt="Foto 18">
-                        <div class="mosaic-overlay">💋</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-9">
-                        <img src="19.jpg" alt="Foto 19">
-                        <div class="mosaic-overlay">🏖️</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-10">
-                        <img src="20.jpg" alt="Foto 20">
-                        <div class="mosaic-overlay">❤️</div>
-                    </div>
-                    <div class="mosaic-item" id="mosaico-11">
-                        <img src="10.jpg" alt="Foto 10 Especial">
-                        <div class="mosaic-overlay">🌹</div>
-                    </div>
+                    <div class="mosaic-item" id="mosaico-0"><img src="1.jpg" alt="Foto 1"><div class="mosaic-overlay">👶</div></div>
+                    <div class="mosaic-item" id="mosaico-1"><img src="2.jpg" alt="Foto 2"><div class="mosaic-overlay">💍</div></div>
+                    <div class="mosaic-item" id="mosaico-2"><img src="3.jpg" alt="Foto 3"><div class="mosaic-overlay">⛪</div></div>
+                    <div class="mosaic-item" id="mosaico-3"><img src="4.jpg" alt="Foto 4"><div class="mosaic-overlay">🏠</div></div>
+                    <div class="mosaic-item" id="mosaico-4"><img src="5.jpg" alt="Foto 5"><div class="mosaic-overlay">🌅</div></div>
+                    <div class="mosaic-item" id="mosaico-5"><img src="6.jpg" alt="Foto 6"><div class="mosaic-overlay">☀️</div></div>
+                    <div class="mosaic-item" id="mosaico-6"><img src="7.jpg" alt="Foto 7"><div class="mosaic-overlay">🌙</div></div>
+                    <div class="mosaic-item" id="mosaico-7"><img src="8.jpg" alt="Foto 8"><div class="mosaic-overlay">🌠</div></div>
+                    <div class="mosaic-item" id="mosaico-8"><img src="9.jpg" alt="Foto 9"><div class="mosaic-overlay">💋</div></div>
+                    <div class="mosaic-item" id="mosaico-9"><img src="10.jpg" alt="Foto 10"><div class="mosaic-overlay">🏖️</div></div>
+                    <div class="mosaic-item" id="mosaico-10"><img src="11.jpg" alt="Foto 11"><div class="mosaic-overlay">❤️</div></div>
+                    <div class="mosaic-item" id="mosaico-11"><img src="12.jpg" alt="Foto 12"><div class="mosaic-overlay">🌹</div></div>
                 </div>
 
                 <div id="mensaje-victoria-final" style="display: none; margin-top: 25px; animation: slideDown 0.6s ease-out;">
@@ -767,14 +726,16 @@
         function iniciarSegundaParte() {
             const audio1 = document.getElementById("mi-cancion");
             const audio2 = document.getElementById("mi-cancion-2");
+            const contenedorAudio2 = document.getElementById("contenedor-cancion-2");
             
+            // Pausar primera canción y reproducir la nueva
             if (audio1) audio1.pause();
+            
+            if (contenedorAudio2) contenedorAudio2.style.display = "block";
+            
             if (audio2) {
                 audio2.play().catch(e => console.log("Audio 2 prevent:", e));
             }
-
-            document.getElementById("titulo-cancion").innerText = "🎵 Segunda Canción de Fondo";
-            document.getElementById("nombre-cancion").innerHTML = "<strong>Abrázame</strong> – CAMI";
 
             const capaFase2 = document.getElementById("capa-fase-2");
             capaFase2.style.display = "block";
@@ -787,7 +748,7 @@
             }, 100);
         }
 
-        /* --- DINÁMICA 1: PUZLE 4x4 (16 PIEZAS) --- */
+        /* LÓGICA PUZLE 4x4 */
         let estadoPuzle = [];
 
         function crearPuzle() {
@@ -816,7 +777,6 @@
         function girarPieza(index, elemento) {
             estadoPuzle[index] = (estadoPuzle[index] + 1) % 4;
             elemento.style.transform = `rotate(${estadoPuzle[index] * 90}deg)`;
-            
             comprobarPuzle();
         }
 
@@ -836,7 +796,7 @@
             }
         }
 
-        /* --- DINÁMICA 2: JUEGO DE PAREJAS Y DESBLOQUEO DE MOSAICO --- */
+        /* LÓGICA JUEGO PAREJAS Y MOSAICO (12 FOTOS) */
         const simbolos = ['👶', '💍', '⛪', '🏠', '🌅', '☀️', '🌙', '🌠', '💋', '🏖️', '❤️', '🌹'];
         let cartasSeleccionadas = [];
         let bloqueoTablero = false;
@@ -910,7 +870,7 @@
             }
         }
 
-        /* --- PARTÍCULAS FLOTANTES DE CORAZONES --- */
+        /* PARTÍCULAS */
         function generateHearts() {
             const heartIcons = ['❤️', '💖', '💕', '✨', '🌸'];
             const container = document.body;
@@ -921,16 +881,12 @@
                     const heart = document.createElement('div');
                     heart.classList.add('heart-particle');
                     heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
-                    
                     heart.style.left = Math.random() * 100 + 'vw';
                     heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
                     heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
                     
                     container.appendChild(heart);
-                    
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 8000);
+                    setTimeout(() => { heart.remove(); }, 8000);
                 }
             }, 600);
         }
